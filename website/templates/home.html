@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+{% block body %}
+<h1 align="center">Notes</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes %}
+  <li style="margin-bottom: 10px;
+  box-shadow: 0 0 1rem 0 rgba(0, 110, 255, 0.884); 
+  border-radius: 50px;" class="list-group-item">
+    {{ note.data }}
+    <form action="/delete-note"method="POST">
+      <input type="hidden" name="noteId" type="text" value="{{ note.id }}">
+      <button type="submit" class="close">
+        <i class="fa fa-trash red-color"></i>
+    </button></form>
+    
+  </li>
+  {% endfor %}
+</ul>
+<form method="POST">
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </div>
+</form>
+{% endblock %}
